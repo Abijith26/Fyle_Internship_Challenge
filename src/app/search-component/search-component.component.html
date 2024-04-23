@@ -18,17 +18,15 @@
   </form>
 </div>
 
-@if (dataReceived) {
+<!-- Data Present -->
+@if (userdataReceived && projectDataReceived) {
 <app-user-component
   [data]="dataArray"
   [projectData]="projectArray"
 ></app-user-component>
-}
 
-<div>{{ links }}</div>
-<!-- @placeholder (minimum 3000ms){
-<app-placeholder-component
-  [data]="dataArray"
-  [projectData]="projectArray"
-></app-placeholder-component>
-} -->
+} @if(noUserData && noRepoData){
+<p class="text-center mt-10 font-semibold">
+  No Github Info found for this user
+</p>
+}

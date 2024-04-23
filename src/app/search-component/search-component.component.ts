@@ -21,33 +21,51 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class SearchComponentComponent {
   username: string = '';
-  dataReceived: boolean = false;
+  userdataReceived: boolean = false;
   projectDataReceived: boolean = false;
   // User Data Array
   dataArray: {} = {};
   // User Project Array
   projectArray: {} = {};
-  links: any;
+
+  noUserData: string = '';
+  noRepoData: string = '';
+
   httpClient = inject(HttpClient);
 
   Submit(): void {
-    this.httpClient
-      .get(`https://api.github.com/users/${this.username}`)
-      .subscribe((data) => {
-        console.log(data);
+    // this.httpClient
+    //   .get(`https://api.github.com/users/${this.username}`)
+    //   .subscribe((data) => {
+    //     console.log(data);
 
+    //     this.dataArray = data;
+    //     this.dataReceived = true;
+    //   });
+
+    fetch(`https://api.github.com/users/${this.username}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
         this.dataArray = data;
-        this.dataReceived = true;
+        this.userdataReceived = true;
+        this.username = '';
+      })
+      .catch((error) => {
+        console.error(
+          'There has been a problem with your fetch operation:',
+          error
+        );
+        this.noUserData = 'Not found';
       });
 
     // Fetching Projects done by users
-    // this.httpClient
-    //   .get(` https://api.github.com/users/${this.username}/repos?per_page=10`)
-    //   .subscribe((projectData) => {
-    //     console.log(projectData);
-    //     this.projectArray = projectData;
-    //     this.projectDataReceived = true;
-    //   });
 
     fetch(`https://api.github.com/users/${this.username}/repos`)
       .then((response) => {
@@ -68,6 +86,7 @@ export class SearchComponentComponent {
           'There has been a problem with your fetch operation:',
           error
         );
+        this.noRepoData = 'Not Found';
       });
   }
 }
