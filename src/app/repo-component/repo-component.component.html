@@ -1,0 +1,22 @@
+<div class="flex flex-col gap-5 bg-gray-400 p-2 w-[100%] h-[100%]">
+  <p class="font-extrabold text-xl text-amber-800 capitalize">
+    {{ repo.name }}
+  </p>
+
+  <!-- Checking for the Availability of Description -->
+  @if (repo.description) {
+  <p class="text-sm font-semibold text-black">{{ repo.description }}</p>
+  } @else {
+  <p class="font-semibold text-black">
+    No Description Available for the project
+  </p>
+  }
+
+  <!-- checking for the availability of programming language  -->
+  @if (repo.language) {
+  <span
+    class="bg-blue-400 text-white font-semibold p-2 inline-block w-[50%] text-center"
+    >{{ repo.language }}</span
+  >
+  }
+</div>

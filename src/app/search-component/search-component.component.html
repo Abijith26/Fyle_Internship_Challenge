@@ -1,0 +1,34 @@
+<div
+  class="bg-slate-500 w-1/2 p-4 mx-auto flex items-center justify-center rounded-md"
+>
+  <form (ngSubmit)="Submit()">
+    <label for="username" class="font-semibold mr-3 text-white">Username</label>
+    <input
+      id="username"
+      type="text"
+      class="border-solid border-2 border-sky-500 rounded-md p-1"
+      [(ngModel)]="username"
+      name="username"
+      placeholder="Eg. John"
+      required
+    />
+    <button class="ml-4 text-center bg-pink-500 p-2 rounded-md" type="submit">
+      Search
+    </button>
+  </form>
+</div>
+
+@if (dataReceived) {
+<app-user-component
+  [data]="dataArray"
+  [projectData]="projectArray"
+></app-user-component>
+}
+
+<div>{{ links }}</div>
+<!-- @placeholder (minimum 3000ms){
+<app-placeholder-component
+  [data]="dataArray"
+  [projectData]="projectArray"
+></app-placeholder-component>
+} -->

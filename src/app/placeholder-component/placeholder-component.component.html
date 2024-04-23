@@ -1,0 +1,38 @@
+@if(user){
+
+<div
+  class="flex justify-start items-center gap-24 p-10 w-[50%] mx-auto bg-gray-200"
+>
+  <div class="flex flex-col gap-5 items-center justify-center">
+    <img class="bg-gray-200 rounded-full" />
+    <div class="flex gap-2">
+      <img class="w-6 h-6 bg-gray-200" />
+      <a class="font-bold bg-gray-200"></a>
+    </div>
+  </div>
+  <div class="font-serif flex flex-col gap-6">
+    <p class="text-3xl font-extrabold bg-gray-200 capitalize"></p>
+    <p class="font-semibold text-xl bg-gray-200"></p>
+    <p class="font-semibold text-xl bg-gray-200"></p>
+    <a class="bg-gray-200"></a>
+  </div>
+</div>
+} @for(repo of projectData; track repo.id){
+
+<div class="w-[50%] h-[50%] bg-gray-400 p-6 flex-col gap-6">
+  <p class="font-extrabold text-3xl bg-gray-200 capitalize"></p>
+
+  <!-- Checking for the Availability of Description -->
+  @if (repo.description) {
+  <p class="text-xl font-semibold bg-gray-200"></p>
+  } @else {
+  <p class="bg-gray-200"></p>
+  }
+
+  <!-- checking for the availability of programming language  -->
+  @if (repo.language) { @if(repo.language.length <= 1){
+  <span class="bg-gray-200"></span>
+  } }
+</div>
+
+}
